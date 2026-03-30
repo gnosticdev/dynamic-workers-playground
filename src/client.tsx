@@ -7,16 +7,16 @@ import {
   Textarea
 } from "@cloudflare/kumo";
 import {
-  CaretDown,
-  FileText,
-  GithubLogo,
-  Info,
-  Monitor,
-  Moon,
-  Play,
-  Plus,
-  Sun,
-  X
+  CaretDownIcon,
+  FileTextIcon,
+  GithubLogoIcon,
+  InfoIcon,
+  MonitorIcon,
+  MoonIcon,
+  PlayIcon,
+  PlusIcon,
+  SunIcon,
+  XIcon
 } from "@phosphor-icons/react";
 import { createPortal } from "react-dom";
 import { createRoot } from "react-dom/client";
@@ -74,7 +74,7 @@ function Modal({ open, onClose, title, size = "sm", children }: ModalProps) {
             onClick={onClose}
             className="flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-md border border-kumo-line bg-kumo-base text-kumo-default"
           >
-            <X size={14} />
+            <XIcon size={14} />
           </button>
         </div>
         {children}
@@ -348,7 +348,7 @@ const STATUS_DOT_COLORS: Record<StatusTone, string> = {
 function consolePrefix(level: string) {
   if (level === "error") return "✕";
   if (level === "warn") return "!";
-  return "›";
+  return "•";
 }
 
 function consoleColor(level: string) {
@@ -380,7 +380,7 @@ function SectionLabel({
 }) {
   return (
     <p
-      className={`mb-1.5 text-[11px] font-semibold uppercase tracking-wide ${className ?? "text-kumo-inactive"}`}
+      className={`mb-1.5 text-[11px] font-semibold uppercase tracking-wide ${className ?? "text-muted-foreground"}`}
     >
       {children}
     </p>
@@ -616,7 +616,7 @@ export function App() {
         {/* Explainer card */}
         <Surface className="rounded-xl">
           <div className="flex items-start gap-3 p-4">
-            <Info
+            <InfoIcon
               size={20}
               weight="bold"
               className="mt-0.5 shrink-0 text-kumo-accent"
@@ -625,7 +625,7 @@ export function App() {
               <p className="text-sm font-semibold text-kumo-default">
                 Dynamic Workers Playground
               </p>
-              <p className="mt-1 text-[13px] text-kumo-inactive">
+              <p className="mt-1 text-[13px] text-muted-foreground">
                 Write, bundle, and run Cloudflare Worker code directly in your
                 browser using{" "}
                 <code className="rounded bg-kumo-elevated px-1 font-mono">
@@ -647,7 +647,7 @@ export function App() {
               <h1 className="text-lg font-bold text-kumo-default">
                 Dynamic Workers Playground
               </h1>
-              <p className="text-xs text-kumo-inactive">
+              <p className="text-xs text-muted-foreground">
                 Build and run Workers dynamically from source code
               </p>
             </div>
@@ -658,7 +658,7 @@ export function App() {
               <span
                 className={`inline-block h-2 w-2 rounded-full ${STATUS_DOT_COLORS[status.tone]}`}
               />
-              <span className="text-[13px] text-kumo-inactive">
+              <span className="text-[13px] text-muted-foreground">
                 {status.label}
               </span>
             </div>
@@ -668,7 +668,7 @@ export function App() {
               shape="square"
               aria-label="Toggle theme"
               onClick={toggleTheme}
-              icon={mode === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+              icon={mode === "dark" ? <SunIcon size={16} /> : <MoonIcon size={16} />}
             />
           </div>
         </div>
@@ -680,7 +680,7 @@ export function App() {
             {/* Panel header */}
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-kumo-line px-4 py-3">
               <div className="flex min-w-0 shrink items-center gap-1.5 text-[13px] font-semibold text-kumo-default">
-                <FileText size={16} className="shrink-0" />
+                <FileTextIcon size={16} className="shrink-0" />
                 <span>Source Files</span>
               </div>
 
@@ -690,7 +690,7 @@ export function App() {
                     render={
                       <Button variant="secondary">
                         Load Example...
-                        <CaretDown size={13} />
+                        <CaretDownIcon size={13} />
                       </Button>
                     }
                   />
@@ -707,7 +707,7 @@ export function App() {
                 </DropdownMenu>
 
                 <Button variant="secondary" onClick={() => setGithubOpen(true)}>
-                  <GithubLogo size={16} weight="fill" />
+                  <GithubLogoIcon size={16} weight="fill" />
                   Import from GitHub
                 </Button>
               </div>
@@ -717,14 +717,14 @@ export function App() {
             <div className="flex min-w-0 items-stretch border-b border-kumo-line">
               <div className="flex min-w-0 flex-auto flex-nowrap items-center gap-0.5 overflow-x-auto overflow-y-hidden px-2">
                 {orderedFiles.map((filename) => (
-                  <button
+                  <div
+                    role="button"
                     key={filename}
-                    type="button"
                     onClick={() => setCurrentFile(filename)}
                     className={`flex shrink-0 cursor-pointer items-center gap-1 border-b-2 bg-transparent px-2.5 py-2 font-mono text-xs ${
                       filename === currentFile
                         ? "border-kumo-brand text-kumo-default"
-                        : "border-transparent text-kumo-inactive"
+                        : "border-transparent text-muted-foreground"
                     }`}
                   >
                     <span>{filename}</span>
@@ -741,7 +741,7 @@ export function App() {
                         ×
                       </button>
                     ) : null}
-                  </button>
+                  </div>
                 ))}
               </div>
 
@@ -750,9 +750,9 @@ export function App() {
                   type="button"
                   onClick={() => setAddFileOpen(true)}
                   aria-label="Add new file"
-                  className="flex cursor-pointer items-center rounded bg-transparent p-1.5 text-kumo-inactive"
+                  className="flex cursor-pointer items-center rounded bg-transparent p-1.5 text-muted-foreground"
                 >
-                  <Plus size={14} weight="bold" />
+                  <PlusIcon size={14} weight="bold" />
                 </button>
               </div>
             </div>
@@ -790,7 +790,7 @@ export function App() {
                   disabled={running}
                   onClick={() => void runWorker()}
                 >
-                  <Play size={14} weight="fill" />
+                  <PlayIcon size={14} weight="fill" />
                   {running ? "Running..." : "Run Worker"}
                 </Button>
                 <Button variant="secondary" onClick={formatCurrentFile}>
@@ -823,7 +823,7 @@ export function App() {
           {/* Output panel */}
           <Surface className="flex min-h-[600px] min-w-0 flex-col rounded-xl">
             <div className="flex items-center gap-1.5 border-b border-kumo-line px-4 py-3 text-[13px] font-semibold text-kumo-default">
-              <Monitor size={16} />
+              <MonitorIcon size={16} />
               <span>Output</span>
             </div>
 
@@ -837,7 +837,7 @@ export function App() {
                     {error.message}
                   </pre>
                   {error.stack ? (
-                    <pre className="mt-2 font-mono text-[11px] text-kumo-inactive whitespace-pre-wrap break-words">
+                    <pre className="mt-2 font-mono text-[11px] text-muted-foreground whitespace-pre-wrap break-words">
                       {error.stack}
                     </pre>
                   ) : null}
@@ -845,8 +845,8 @@ export function App() {
               ) : null}
 
               {!error && !result ? (
-                <div className="flex flex-1 flex-col items-center justify-center gap-3 text-kumo-inactive">
-                  <Play size={48} />
+                <div className="flex flex-1 flex-col items-center justify-center gap-3 text-muted-foreground">
+                  <PlayIcon size={48} />
                   <p className="text-sm">
                     Click &ldquo;Run Worker&rdquo; to bundle and execute your
                     code
@@ -862,7 +862,7 @@ export function App() {
                       className={
                         result.workerError
                           ? "text-status-error"
-                          : "text-kumo-inactive"
+                          : "text-muted-foreground"
                       }
                     >
                       {result.workerError
@@ -876,14 +876,14 @@ export function App() {
                           {result.workerError.message}
                         </pre>
                         {result.workerError.stack ? (
-                          <pre className="mt-2 font-mono text-[11px] text-kumo-inactive whitespace-pre-wrap break-words">
+                          <pre className="mt-2 font-mono text-[11px] text-muted-foreground whitespace-pre-wrap break-words">
                             {result.workerError.stack}
                           </pre>
                         ) : null}
                       </>
                     ) : (
                       <div>
-                        <p className="mb-1 font-mono text-[11px] text-kumo-inactive">
+                        <p className="mb-1 font-mono text-[11px] text-muted-foreground">
                           Content-Type:{" "}
                           {getContentType(result.response.headers)}
                         </p>
@@ -916,7 +916,7 @@ export function App() {
                           </div>
                         ))
                       ) : (
-                        <span className="text-xs text-kumo-inactive">
+                        <span className="text-xs text-muted-foreground">
                           No console output. Use <code>console.log()</code> in
                           your worker to see logs here.
                         </span>
@@ -940,7 +940,7 @@ export function App() {
                           key={label}
                           className="rounded-md bg-kumo-elevated px-2.5 py-2 text-center"
                         >
-                          <p className="text-[11px] text-kumo-inactive">
+                          <p className="text-[11px] text-muted-foreground">
                             {label}
                           </p>
                           <p className="mt-0.5 font-mono text-sm font-semibold">
@@ -960,7 +960,7 @@ export function App() {
                       </p>
 
                       <div>
-                        <p className="mb-1 text-[11px] uppercase tracking-wide text-kumo-inactive">
+                        <p className="mb-1 text-[11px] uppercase tracking-wide text-muted-foreground">
                           Modules ({result.bundleInfo.modules.length})
                         </p>
                         <div className="flex flex-wrap gap-1">
@@ -994,7 +994,7 @@ export function App() {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-center gap-2 py-3 text-xs text-kumo-inactive">
+        <div className="flex items-center justify-center gap-2 py-3 text-xs text-muted-foreground">
           <span>Powered by</span>
           <a
             href="https://workers.cloudflare.com"
@@ -1040,13 +1040,13 @@ export function App() {
         onClose={() => setGithubOpen(false)}
         title={
           <>
-            <GithubLogo size={18} weight="fill" />
+            <GithubLogoIcon size={18} weight="fill" />
             Import from GitHub
           </>
         }
         size="lg"
       >
-        <p className="text-[13px] text-kumo-inactive break-words">
+        <p className="text-[13px] text-muted-foreground break-words">
           Paste a GitHub URL to import files from any repository. Supports
           repos, branches, and subdirectories.
         </p>
@@ -1061,7 +1061,7 @@ export function App() {
           className="w-full"
         />
         <div className="text-xs">
-          <span className="text-kumo-inactive">Example: </span>
+          <span className="text-muted-foreground">Example: </span>
           <button
             type="button"
             className="cursor-pointer border-none bg-transparent p-0 text-xs text-kumo-accent underline"

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "@cloudflare/kumo/styles/tailwind";
+@import "./theme.css";
+
 @source "../../../node_modules/@cloudflare/kumo/dist/**/*.{js,jsx,ts,tsx}";
 
 html,
@@ -11,14 +13,14 @@ body,
 }
 
 @theme {
-  --color-status-success: oklch(0.55 0.15 145);
-  --color-status-error: oklch(0.55 0.2 25);
-  --color-status-warning: oklch(0.65 0.15 75);
-  --color-status-idle: var(--color-kumo-line);
+  --color-status-success: var(--success);
+  --color-status-error: var(--error);
+  --color-status-warning: var(--warning);
+  --color-status-idle: var(--info);
 }
 
 html[data-mode="dark"] {
-  --color-status-success: oklch(0.72 0.15 145);
-  --color-status-error: oklch(0.72 0.18 25);
-  --color-status-warning: oklch(0.75 0.14 75);
+  --color-status-success: var(--success);
+  --color-status-error: var(--error);
+  --color-status-warning: var(--warning);
 }
